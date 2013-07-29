@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      flash[:success] = "Welcome to JackerNews!"
+      flash[:success] = "Welcome to HackerNews!"
       redirect_to articles_path  # need to redirect to user_session_new page
     else
       render "new"         # go back to the signup page and display errors

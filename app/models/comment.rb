@@ -3,5 +3,8 @@ class Comment < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :posting, :class_name => "Article"
+  belongs_to :posting, :class_name => "Comment"
+
+  has_many :votes, :as => :posting
 
 end

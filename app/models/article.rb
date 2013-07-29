@@ -7,7 +7,6 @@ class Article < ActiveRecord::Base
   belongs_to :owner, :class_name => "User"
   has_many :votes, :as => :posting
   has_many :comments, :foreign_key => :posting_id
-  # has_many :commments
 
   def recent?
     self.created_at > (Time.zone.now - 900)

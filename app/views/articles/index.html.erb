@@ -1,22 +1,21 @@
-<h1>JackerNews</h1>
+<h1>HackerNews</h1>
 
 <p>
 <table>
 
 <!-- ADD THE ACTIVE RECORD QUERY TO GENERATE LIST OF ARTICLES IN ORDER BY COUNT -->
 
-<% @articles.each_with_index do |article, i| %>
-      <tr><td> <%= i+1 %>. </td>
-      <td> <%= link_to article.title, article.url %></td>
-       <% if current_user == article.owner %>
-            <td> <%= link_to 'Edit', edit_article_path(article) if article.recent? %> </td>
-          <!-- IF THE CURRENT USER IS NIL OR HAS VOTED ON THE POSTING ALREADY, DON'T SHOW VOTE LINK-->
-       <% elsif current_user != nil && (Vote.where(:user_id => current_user, :posting_id => article.id)).empty?  %>
-            <td><%= link_to 'Vote', vote_article_path(article) %></td>
-       <% end %>
-          <td> <%=  article.vote_count  %> </td>
-          <td> <%=  link_to 'Comment', article_path(article) %> </td>
-       </tr>
+<% @articles.each do |article| %>
+  <td> <%= link_to article.title, article.url %></td>
+   <% if current_user == article.owner %>
+        <td> <%= link_to 'Edit', edit_article_path(article) if article.recent? %> </td>
+      <!-- IF THE CURRENT USER IS NIL OR HAS VOTED ON THE POSTING ALREADY, DON'T SHOW VOTE LINK-->
+   <% elsif current_user != nil && (Vote.where(:user_id => current_user, :posting_id => article.id)).empty?  %>
+        <td><%= link_to 'Vote', vote_article_path(article) %></td>
+   <% end %>
+      <td> <%=  article.vote_count  %> </td>
+      <td> <%=  link_to 'Comments', article_path(article) %> </td>
+   </tr>
 <% end %>
 
 
